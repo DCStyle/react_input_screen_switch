@@ -1,31 +1,24 @@
-import React from 'react';
-import { useFormData } from "./FormDataContext";
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export default function InputScreen() {
-	const { formData, setFormData } = useFormData();
-
-	if (formData)
-	{
-		return null;
-	}
+	const [inputValue, setInputValue] = useState('');
+	const navigate = useNavigate();
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-
-		const formData = new FormData(e.target),
-			value = formData.get('inputValue');
-
-		setFormData(value);
-	}
+		navigate(`/result/${inputValue}`);
+	};
 
 	return (
 		<form
 			onSubmit={handleFormSubmit}
 			style={{margin: '15em 20em', display: 'flex', flexDirection: 'column'}}>
 			<input type='text'
-			       name='inputValue'
 			       placeholder='Enter something...'
 			       style={{padding: '.5rem 1rem', fontSize: '12pt'}}
+			       value={inputValue}
+			       onChange={(e) => setInputValue(e.target.value)}
 			/>
 
 			<button type='submit' value='submit'
