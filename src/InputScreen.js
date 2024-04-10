@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function InputScreen() {
 	const navigate = useNavigate();
@@ -10,7 +10,8 @@ export default function InputScreen() {
 		let formData = new FormData(e.target),
 			inputValue = formData.get('inputValue');
 
-		navigate(`/result/${inputValue}`);
+		// Use query parameters instead of URL parameters
+		navigate(`/result?inputValue=${encodeURIComponent(inputValue)}`);
 	};
 
 	return (
